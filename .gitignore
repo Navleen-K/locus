@@ -3,3 +3,6 @@ api/node_modules
 api/.env
 api/uploads/*
 client/.env
+
+*.env
+.env
