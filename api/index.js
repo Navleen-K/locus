@@ -35,7 +35,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-const allowedOrigins = ['https://locus-lilac.vercel.app'];
+const allowedOrigins = ['https://locus-lilac.vercel.app', 'https://locus-fc5kcq86m-navleens-projects.vercel.app'];
 app.use(cors({
   origin: function (origin, callback) {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
