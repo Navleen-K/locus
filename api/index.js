@@ -36,7 +36,7 @@ app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: ['https://locus-lilac.vercel.app/', 'http://127.0.0.1:5173'],
 }));
 
 // AWS S3 Configuration
