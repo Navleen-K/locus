@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../src/UserContext";
+import {URL} from "../config.js";
 
 export default function GuideBookingWidget({ guide }) {
   const [startDate, setStartDate] = useState('');
@@ -19,7 +20,7 @@ export default function GuideBookingWidget({ guide }) {
 
   async function bookThisGuide() {
     try {
-      const response = await axios.post('http://localhost:4000/api/book-guide', {
+      const response = await axios.post(`${URL}/api/book-guide`, {
         guideId: guide._id,
         bookingDetails: {
           startDate,

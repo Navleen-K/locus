@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import {URL} from "../config.js";
 
 export default function AccountNav() {
   const { pathname } = useLocation();
@@ -20,7 +21,7 @@ export default function AccountNav() {
     }
 
     try {
-      const response = await axios.get('http://localhost:4000/api/guide-profile', {
+      const response = await axios.get(`${URL}/api/guide-profile`, {
         params: { email: userEmail }, // Pass the email as a query parameter
       });
 

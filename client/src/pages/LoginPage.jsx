@@ -2,6 +2,8 @@ import { Link, Navigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../UserContext.jsx";
+import {URL} from "../../config.js";
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -13,7 +15,7 @@ export default function LoginPage() {
   async function handleLoginSubmit(ev) {
     ev.preventDefault();
     try {
-      const { data } = await axios.post('http://localhost:4000/api/login', { email, password, role });
+      const { data } = await axios.post(`${URL}/api/login`, { email, password, role });
       setUser(data);
       localStorage.setItem('UserEmail', email);
       alert('Login successful');

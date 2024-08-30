@@ -4,13 +4,14 @@ import axios from "axios";
 import AddressLink from "../AddressLink";
 import PlaceGallery from "../PlaceGallery";
 import BookingDates from "../BookingDates";
+import {URL} from "../../config.js";
 
 export default function BookingPage() {
   const {id} = useParams();
   const [booking,setBooking] = useState(null);
   useEffect(() => {
     if (id) {
-      axios.get('http://localhost:4000/api/bookings').then(response => {
+      axios.get(`${URL}/api/bookings`).then(response => {
         const foundBooking = response.data.find(({_id}) => _id === id);
         if (foundBooking) {
           setBooking(foundBooking);

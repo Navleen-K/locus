@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import {URL} from "../../config.js";
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -12,7 +13,7 @@ export default function RegisterPage() {
     ev.preventDefault();
     try {
       await axios.post(
-        'http://localhost:4000/api/register',
+        `${URL}/api/register`,
         { name, email, password, role }, // data object
         { withCredentials: true } // config object
       );

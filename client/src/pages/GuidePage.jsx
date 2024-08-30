@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Image from '../Image.jsx';
+import {URL} from "../../config.js";
 
 export default function GuidesPage() {
   const [guides, setGuides] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/guides').then(response => {
+    axios.get(`${URL}/api/guides`).then(response => {
       setGuides(response.data);
     });
   }, []);

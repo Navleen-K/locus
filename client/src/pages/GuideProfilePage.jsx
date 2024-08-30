@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import {URL} from "../../config.js";
 
 export default function GuideProfilePage() {
   const [guide, setGuide] = useState(null);
@@ -27,7 +28,7 @@ export default function GuideProfilePage() {
 
       try {
         // Fetch guide profile
-        const { data } = await axios.get('http://localhost:4000/api/guide-profile', {
+        const { data } = await axios.get(`${URL}/api/guide-profile`, {
           params: { email: userEmail } // Pass the email as a query parameter
         });
 
@@ -39,7 +40,7 @@ export default function GuideProfilePage() {
         setPlaces(data.places.join(', '));
 
         // Fetch bookings related to the guide
-        const bookingsResponse = await axios.get(`http://localhost:4000/api/guide-bookings/${data._id}`);
+        const bookingsResponse = await axios.get(`${URL}/api/guide-bookings/${data._id}`);
         setBookings(bookingsResponse.data); // Assuming bookingsResponse.data is an array of bookings
       } catch (e) {
         console.error('Failed to fetch guide data', e);
@@ -64,7 +65,7 @@ export default function GuideProfilePage() {
     formData.append('places', places);
 
     try {
-      await axios.post('http://localhost:4000/api/update-guide', formData, {
+      await axios.post(`${URL}/api/update-guide`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

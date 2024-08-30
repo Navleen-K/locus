@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "../Image.jsx";
 import GuideBookingWidget from "../GuideBookingWidget.jsx"; // Adjust path as necessary
+import {URL} from "../../config.js";
 
 export default function GuideDetailPage() {
   const { id } = useParams();
@@ -13,7 +14,7 @@ export default function GuideDetailPage() {
     if (!id) {
       return;
     }
-    axios.get(`http://localhost:4000/api/guides/${id}`)
+    axios.get(`${URL}/api/guides/${id}`)
       .then(response => {
         setGuide(response.data);
         setError(null); // Clear any previous error

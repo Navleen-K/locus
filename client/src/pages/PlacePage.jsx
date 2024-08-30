@@ -4,6 +4,7 @@ import axios from "axios";
 import BookingWidget from "../BookingWidget";
 import PlaceGallery from "../PlaceGallery";
 import AddressLink from "../AddressLink";
+import {URL} from "../../config";
 
 export default function PlacePage() {
   const {id} = useParams();
@@ -12,7 +13,7 @@ export default function PlacePage() {
     if (!id) {
       return;
     }
-    axios.get(`http://localhost:4000/api/places/${id}`).then(response => {
+    axios.get(`${URL}/api/places/${id}`).then(response => {
       setPlace(response.data);
     });
   }, [id]);

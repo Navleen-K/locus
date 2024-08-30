@@ -4,6 +4,7 @@ import {Link, Navigate, useParams} from "react-router-dom";
 import axios from "axios";
 import PlacesPage from "./PlacesPage";
 import AccountNav from "../AccountNav";
+import {URL} from "../../config.js";
 
 export default function ProfilePage() {
   const [redirect, setRedirect] = useState(null);
@@ -23,7 +24,7 @@ export default function ProfilePage() {
     }
 
     try {
-      const response = await axios.get('http://localhost:4000/api/guide-profile', {
+      const response = await axios.get(`${URL}/api/guide-profile`, {
         params: { email: userEmail }, // Pass the email as a query parameter
       });
 
@@ -45,7 +46,7 @@ export default function ProfilePage() {
   
 
   async function logout() {
-    await axios.post('http://localhost:4000/api/logout');
+    await axios.post(`${URL}/api/logout`);
     localStorage.removeItem('UserEmail');
     setRedirect('/');
     setUser(null);

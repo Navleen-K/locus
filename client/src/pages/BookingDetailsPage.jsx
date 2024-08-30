@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import {URL} from "../../config.js";
 
 export default function BookingDetailsPage() {
   const { bookingId } = useParams();
@@ -12,13 +13,13 @@ export default function BookingDetailsPage() {
   useEffect(() => {
     async function fetchBooking() {
       try {
-        const response = await axios.get(`http://localhost:4000/api/book-guide/${bookingId}`);
+        const response = await axios.get(`${URL}/api/book-guide/${bookingId}`);
         const bookingData = response.data;
         setBooking(bookingData);
 
         // Fetch guide details
         if (bookingData.guide && bookingData.guide._id) {
-          const guideResponse = await axios.get(`http://localhost:4000/api/guides/${bookingData.guide._id}`);
+          const guideResponse = await axios.get(`${URL}/api/guides/${bookingData.guide._id}`);
           setGuide(guideResponse.data);
         }
       } catch (err) {

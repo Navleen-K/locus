@@ -1,6 +1,7 @@
 import {createContext, useEffect, useState} from "react";
 import axios from "axios";
 import {data} from "autoprefixer";
+import {URL} from "../config.js";
 
 export const UserContext = createContext({});
 
@@ -9,7 +10,7 @@ export function UserContextProvider({children}) {
   const [ready,setReady] = useState(false);
   useEffect(() => {
     if (!user) {
-      axios.get('http://localhost:4000/api/profile', { withCredentials: true }).then(({data}) => {
+      axios.get(`${URL}/api/profile`, { withCredentials: true }).then(({data}) => {
         setUser(data);
         setReady(true);
       });

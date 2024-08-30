@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
+import {URL} from "../../config.js";
 
 export default function RegisterGuidePage() {
   const [name, setName] = useState('');
@@ -30,7 +31,7 @@ export default function RegisterGuidePage() {
     formData.append('places', places);
 
     try {
-      await axios.post('http://localhost:4000/api/register-guide', formData, {
+      await axios.post(`${URL}/api/register-guide`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

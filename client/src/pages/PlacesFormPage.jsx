@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import AccountNav from "../AccountNav";
 import {Navigate, useParams} from "react-router-dom";
+import {URL} from "../../config.js";
 
 export default function PlacesFormPage() {
   const {id} = useParams();
@@ -22,7 +23,7 @@ export default function PlacesFormPage() {
     if (!id) {
       return;
     }
-    axios.get('http://localhost:4000/api/places/'+id).then(response => {
+    axios.get(`${URL}/api/places/`+id).then(response => {
        const {data} = response;
        setTitle(data.title);
        setAddress(data.address);
@@ -64,13 +65,13 @@ export default function PlacesFormPage() {
     };
     if (id) {
       // update
-      await axios.put('http://localhost:4000/api/places', {
+      await axios.put(`${URL}/api/places`, {
         id, ...placeData
       });
       setRedirect(true);
     } else {
       // new place
-      await axios.post('http://localhost:4000/api/places', placeData);
+      await axios.post(`${URL}/api/places`, placeData);
       setRedirect(true);
     }
 
