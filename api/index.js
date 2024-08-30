@@ -36,11 +36,23 @@ app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
 
+const allowedOrigins = [
+  process.env.MONGO_URL, 'https://locus-lilac.vercel.app', 'http://localhost:5173', 'http://127.0.0.1:5173'
+];
+
 app.use(cors({
-  origin: [process.env.MONGO_URL, 'https://locus-lilac.vercel.app/', 'http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 }));
+
+app.options('*', cors());
 
 // AWS S3 Configuration
 const s3Client = new S3Client({
