@@ -35,11 +35,18 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-app.use(cors());
-// app.use(cors({
-//   credentials: true,
-//   origin: ['https://locus-lilac.vercel.app/'],
-// }));
+const allowedOrigins = ['https://locus-lilac.vercel.app'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
 
 // AWS S3 Configuration
 const s3Client = new S3Client({
