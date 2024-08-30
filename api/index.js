@@ -44,6 +44,7 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 }));
 
@@ -80,7 +81,10 @@ async function uploadToS3(buffer, originalFilename, mimetype) {
 function getUserDataFromReq(req) {
   return new Promise((resolve, reject) => {
     jwt.verify(req.cookies.token, jwtSecret, (err, userData) => {
-      if (err) return reject(err);
+      if (err) {
+        console.error('JWT verification error:', err);
+        return reject(err);
+      }
       resolve(userData);
     });
   });
